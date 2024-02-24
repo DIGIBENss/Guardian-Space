@@ -28,9 +28,12 @@ public class EnemyAi : MonoBehaviour
     {
         if (Time.time >= nextFireTime)
         {
-            Vector3 playerPosition = _searchPlayer.GetPlayerPosition(); 
-            Vector3 directionToPlayer = (playerPosition - _positionShooting.position).normalized; 
-            Quaternion bulletRotation = Quaternion.LookRotation(directionToPlayer); 
+            Vector3 playerPosition = _searchPlayer.GetPlayerPosition();
+            Debug.Log("Player Position: " + playerPosition); // Выводим позицию игрока в консоль
+            Vector3 directionToPlayer = (playerPosition - _positionShooting.position).normalized;
+            Quaternion bulletRotation = Quaternion.LookRotation(directionToPlayer);
+            Debug.Log("_positionShooting: " + _positionShooting.position);
+            Debug.Log("Bullet Rotation: " + bulletRotation); // Выводим поворот пули в консоль
             Instantiate(_bulletShooting, _positionShooting.position, bulletRotation); 
             nextFireTime = Time.time + fireRate; 
         }

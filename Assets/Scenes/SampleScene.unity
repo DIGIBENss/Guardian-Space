@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemies: []
-  _radiusWeapon: 10
+  _radiusWeapon: 25
   _weaponStation: {fileID: 124451922}
 --- !u!114 &124451924
 MonoBehaviour:

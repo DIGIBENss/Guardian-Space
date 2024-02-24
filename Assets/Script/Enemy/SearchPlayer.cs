@@ -5,7 +5,7 @@ public class SearchPlayer : MonoBehaviour
 {
     public HealthStation healthStation;
     public Transform _playerTransform;
-    public float stopDistance = 7f;
+    public float stopDistance = 1f;
     [SerializeField] private EnemyAi _enemyAi;
     private NavMeshAgent _agent;
 
