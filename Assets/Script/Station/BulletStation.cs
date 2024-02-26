@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletStation : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 2f;
     public float lifeDuration = 5f;
 
     private void Start()
@@ -14,7 +14,8 @@ public class BulletStation : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.position += transform.forward * speed * Time.deltaTime;
+        //transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -23,7 +24,7 @@ public class BulletStation : MonoBehaviour
         {
             print("enemy");
             var enemy = other.gameObject.GetComponent<EnemyHealth>();
-            enemy.TakeDamage(50, 0);
+            enemy.TakeDamage(20, 0);
             Destroy(gameObject);
         }
     }
