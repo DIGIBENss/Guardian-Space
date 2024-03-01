@@ -12,18 +12,14 @@ public class SpawnEnemy : MonoBehaviour
     {
         InvokeRepeating("RandomSpawnEnemy", _time, _reapetRateSpawnEnemy);
     }
+
     private void RandomSpawnEnemy()
     {
-       if(HealthStation.Station?.Invoke() == true)
+        if(Station.Singleton.IsAlive)
         {
-            int postion = UnityEngine.Random.Range(0, _postionspawns.Length);
+            var postion = UnityEngine.Random.Range(0, _postionspawns.Length);
             Instantiate(_enemys[0], _postionspawns[postion].transform.position, Quaternion.identity);
         }    
-       else
-        {
-            print("Босс нету врагов");
-        }
-      
     }
 
 }
