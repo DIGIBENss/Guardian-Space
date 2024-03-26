@@ -150,7 +150,7 @@ MonoBehaviour:
   _positionShooting: {fileID: 7847512901955382819}
   _bulletShooting: {fileID: 1631564598692535151, guid: 4d436e382c4da0a47a2278559a18eb31,
     type: 3}
-  fireRate: 0.5
+  fireRate: 1.5
 --- !u!114 &3483866953288287243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,8 +178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7858e8a8d011c2246983998c041b64ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthStation: {fileID: 0}
-  _playerTransform: {fileID: 0}
   stopDistance: 7
   _enemyAi: {fileID: 9135825659861913925}
 --- !u!54 &8812128488365377628

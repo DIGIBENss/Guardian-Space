@@ -12,18 +12,17 @@ public class EnemyAi : MonoBehaviour
     [SerializeField] GameObject _bulletShooting;
     public float fireRate = 0.5f; 
     private float nextFireTime = 0f;
+
     private void OnEnable()
     {
         _shot += Shooting;
     }
+
     private void OnDisable()
     {
         _shot -= Shooting;
     }
-    private void Start()
-    {
-        
-    }
+
     private void Shooting()
     {
         if (Time.time >= nextFireTime)
