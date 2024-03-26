@@ -8,14 +8,14 @@ using UnityEngine;
 public class WeaponStation : MonoBehaviour
 {
     [SerializeField] private float _damage = 5f;
-    [SerializeField] private float _rateFire = 1f;
+    [SerializeField] private float _rateFire = 100f;
     [SerializeField] private RadiusStation _radiusStation;
     [SerializeField] private GameObject _prefabBullet;
     [SerializeField] private Transform _shoot;
 
     private Transform _cached;
     private bool _isDamage;
-    public float _shootInterval = 0.5f; // Время между выстрелами
+    public float _shootInterval = 1.0f; // Время между выстрелами
     private float _lastShootTime;
     private void Update()
     {

@@ -7,13 +7,15 @@ public class Station : MonoBehaviour
     public StationHealth Health { get; private set; }
     public Weapon MainWeapon { get; private set; }
     public bool IsAlive { get; private set; } = true;
+
     private bool _canShoot = true;
+
     private readonly float _additionalFireRate = 0.1f;
 
     [Header("Weapon")]
     [SerializeField] private BulletStation _bullet;
     [SerializeField] private float _damage, _searchRadius;
-    [SerializeField, Range(.1f, 2)] private float _fireRate;
+    [SerializeField] private float _fireRate;
     [Header("Health")]
     [SerializeField] private float _maxHealth;
 
