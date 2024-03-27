@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifeTime: 2.74
-  _damage: 3.28
+  _damage: 100
   _speed: 0.1
 --- !u!54 &582609611120235640
 Rigidbody:
