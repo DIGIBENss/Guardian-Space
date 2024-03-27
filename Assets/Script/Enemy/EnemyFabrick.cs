@@ -13,7 +13,7 @@ public class EnemyFabrick : MonoBehaviour
     [Header("Wave")] [SerializeField] private GameObject _sliderGameObject;
     [SerializeField] private Slider _sliderWaveCout;
     [SerializeField] private TextMeshProUGUI _textWave;
-    [SerializeField] private List<EnemyMovement> _first, _second, _thrid, _four, _five;
+    [SerializeField] private List<EnemyAi> _first, _second, _thrid, _four, _five;
     [SerializeField] private List<GameObject> _spawnPoints;
 
     [Header("Values : ")] [SerializeField, Range(0, 7)]
@@ -22,7 +22,7 @@ public class EnemyFabrick : MonoBehaviour
     [SerializeField] private int _additionalEnemy;
     [SerializeField, Range(1, 60)] private int _timeToNextWave;
     private int _wave = 0, _tier = 0;
-    [SerializeField] private List<Target> _spawndZombi = new();
+    [SerializeField]private List<EnemyHealth> _spawndZombi = new();
 
 
     private void Start()
@@ -48,16 +48,16 @@ public class EnemyFabrick : MonoBehaviour
             var num = UnityEngine.Random.Range(0, _spawnPoints.Count);
             var point = _spawnPoints[num];
             var enemy = NightPool.Spawn(ChoiseEnemy().gameObject, point.transform.position, Quaternion.identity);
-            enemy.GetComponent<Target>().Initialize();
-            enemy.GetComponent<EnemyMovement>().Initialize();
-            enemy.GetComponent<Target>().OnDiee += CheckEnemyCount;
-            _spawndZombi.Add(enemy.GetComponent<Target>());
+            enemy.GetComponent<EnemyHealth>().Initialize();
+            //enemy.GetComponent<EnemyMovement>().Initialize();
+            enemy.GetComponent<EnemyHealth>().OnDiee += CheckEnemyCount;
+            _spawndZombi.Add(enemy.GetComponent<EnemyHealth>());
         }
     }
 
-    private void CheckEnemyCount(Target target)
+    private void CheckEnemyCount(EnemyHealth enemy)
     {
-        _spawndZombi.Remove(target);
+        _spawndZombi.Remove(enemy);
         if (_spawndZombi.Count == 0)
         {
             StartCoroutine(StartNewWave());
@@ -88,7 +88,7 @@ public class EnemyFabrick : MonoBehaviour
         yield break;
     }
 
-    private EnemyMovement ChoiseEnemy()
+    private EnemyAi ChoiseEnemy()
     {
         switch (_tier)
         {

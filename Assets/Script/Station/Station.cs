@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Station : MonoBehaviour
 {
@@ -12,26 +14,39 @@ public class Station : MonoBehaviour
 
     private readonly float _additionalFireRate = 0.1f;
 
-    [Header("Weapon")]
-    [SerializeField] private BulletStation _bullet;
+    [Header("Weapon")] [SerializeField] private BulletStation _bullet;
     [SerializeField] private float _damage, _searchRadius;
     [SerializeField] private float _fireRate;
-    [Header("Health")]
-    [SerializeField] private float _maxHealth;
+    [Header("Health")] [SerializeField] private float _maxHealth;
+
+    [SerializeField] private Slider _sliderHP;
 
     public void Up()
     {
         _fireRate -= _additionalFireRate;
         MainWeapon.Up();
         Health.Up();
-    } 
+    }
+
+    private void Start()
+    {
+        _sliderHP.minValue = 0;
+        _sliderHP.maxValue = _maxHealth;
+        _sliderHP.value = _maxHealth;
+    }
+
 
     private void Awake()
     {
         lock (Singleton = this)
-        Health = new(_maxHealth);
+            Health = new(_maxHealth);
+        Health.OnValueChaned += ChangeSliderValue;
         MainWeapon = new(_bullet, _damage, _searchRadius);
-        Health.OnDie += () => IsAlive = false;
+        Health.OnDie += () =>
+        {
+            IsAlive = false;
+            Destroy(gameObject);
+        };
     }
 
     private void Update()
@@ -48,7 +63,6 @@ public class Station : MonoBehaviour
         _canShoot = false;
         yield return new WaitForSeconds(_fireRate);
         _canShoot = true;
-
     }
 
     private void OnDrawGizmosSelected()
@@ -56,4 +70,11 @@ public class Station : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _searchRadius);
     }
+
+    private void ChangeSliderValue(float value)
+    {
+        _sliderHP.value  = value;
+    }
+
+    private void OnDestroy() => Health.OnValueChaned -= ChangeSliderValue;
 }
