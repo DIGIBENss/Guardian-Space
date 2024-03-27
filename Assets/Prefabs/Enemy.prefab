@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3413299184991657939}
   - component: {fileID: 6240553897162061447}
   - component: {fileID: 9135825659861913925}
-  - component: {fileID: 3483866953288287243}
+  - component: {fileID: 1746591195422857765}
   - component: {fileID: 4036397643948803609}
   - component: {fileID: 8812128488365377628}
   m_Layer: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   _bulletShooting: {fileID: 1631564598692535151, guid: 4d436e382c4da0a47a2278559a18eb31,
     type: 3}
   fireRate: 1.5
---- !u!114 &3483866953288287243
+--- !u!114 &1746591195422857765
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,12 +160,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 72149530606856401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09c0bf2b5678e7548a53f29ec913d29e, type: 3}
+  m_Script: {fileID: 11500000, guid: 024a003f926f5894bab94e77d1d89926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
-  _maxHealth: 100
-  healthBar: {fileID: 8998725109254276080}
+  _maxHealth: 50
+  _gold: 20
+  _healthBar: {fileID: 8998725109254276080}
 --- !u!114 &4036397643948803609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,7 +444,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
