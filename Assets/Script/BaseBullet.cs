@@ -15,7 +15,7 @@ public abstract class BaseBullet : MonoBehaviour, IBullet
         this.transform.Translate(Vector3.forward * _speed);
 
     protected virtual void DoDamage(IDamageable damageable) =>
-        damageable.TakeDamage(_damage, _speed);
+        damageable.TakeDamage(_damage);
     
     public void Create(Vector3 pos, Quaternion rotation, float damage)
     {

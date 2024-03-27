@@ -20,7 +20,7 @@ public class StationHealth : IDamageable
     public void Up() =>
         _maxHealth += _additional;
 
-    public void TakeDamage(float damage, float speed)
+    public void TakeDamage(float damage)
     {
         _health -= damage;
         if(_health < 0)OnDie?.Invoke();

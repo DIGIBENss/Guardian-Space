@@ -23,7 +23,7 @@ public class HealthStation : MonoBehaviour, IDamageable
         }
     }
 
-    public void TakeDamage(float damage, float speed)
+    public void TakeDamage(float damage)
     {
         _health -= damage;
         _sliderHP.value = _health;
