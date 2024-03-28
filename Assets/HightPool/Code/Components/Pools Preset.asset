@@ -24,3 +24,14 @@ MonoBehaviour:
     _preloadSize: 16
     _dontDestroyOnLoad: 0
     _warnings: 0
+  - _name: Tier1(B)
+    _enabled: 0
+    _prefab: {fileID: 986353306173953421, guid: 65e53247cc6dd4c48ba7ba1a45bc6d2f,
+      type: 3}
+    _behaviourOnCapacityReached: 0
+    _despawnType: 0
+    _callbacksType: 0
+    _capacity: 64
+    _preloadSize: 16
+    _dontDestroyOnLoad: 0
+    _warnings: 0

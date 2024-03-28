@@ -18,16 +18,27 @@ public class Weapon
     public void Shoot(Transform instancePosition, Transform firepoint = null)
     {
         FindTarget(instancePosition.position);
-        if (_target != null && _canShoot) _bullet.Create(firepoint == null ? instancePosition.position : firepoint.position, Quaternion.LookRotation(_target.transform.position), _damage);
-        
+        if (_target != null && _canShoot)
+            _bullet.Create(firepoint == null ? instancePosition.position : firepoint.position,
+                Quaternion.LookRotation(_target.transform.position), _damage);
     }
 
     private void FindTarget(Vector3 instancePosition)
     {
-        if (_target != null) return;
-        foreach(var item in Physics.OverlapSphere(instancePosition, _searchRadius))
+        if (_target != null && _target.gameObject.activeSelf)
         {
-            if(item.TryGetComponent(out EnemyHealth enemy)) _target = enemy;
+            return;
+        }
+
+        _target = null; // Сбрасываем текущую цель
+
+        foreach (var item in Physics.OverlapSphere(instancePosition, _searchRadius))
+        {
+            if (item.TryGetComponent(out EnemyHealth enemy) && enemy.gameObject.activeSelf)
+            {
+                _target = enemy;
+                break; // Выходим из цикла после нахождения новой цели
+            }
         }
     }
 

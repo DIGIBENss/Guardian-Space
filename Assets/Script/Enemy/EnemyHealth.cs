@@ -26,23 +26,23 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        if (!_canBeDamaged || _isDead) return;
-        _canBeDamaged = false;
+        //if (!_canBeDamaged || _isDead) return;
+       // _canBeDamaged = false;
         _health -= damage;
         if (_health <= 0)
         {
-            _health = 0;
-            _isDead = true;
+            //_health = 0;
+            //_isDead = true;
             OnDie?.Invoke();
             OnDiee?.Invoke(this);
             if (Station.Singleton != null)
             {
                 //ZombieCounter.UpdateStat();
                 Station.Singleton.GetComponent<Wallet>().AddMoney(_gold);
-                NightPool.Despawn(this.gameObject, 2f);
+                NightPool.Despawn(this.gameObject, 1f);
             }
         }
-        _canBeDamaged = true;
+       // _canBeDamaged = true;
     }
     public void Initialize()
     {
