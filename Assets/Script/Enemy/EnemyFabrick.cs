@@ -22,7 +22,7 @@ public class EnemyFabrick : MonoBehaviour
     [SerializeField] private int _additionalEnemy;
     [SerializeField, Range(1, 60)] private int _timeToNextWave;
     private int _wave = 0, _tier = 0;
-    [SerializeField]private List<EnemyHealth> _spawndZombi = new();
+    [SerializeField]private List<EnemyHealth> _spawndEnemy = new();
 
 
     private void Start()
@@ -51,14 +51,14 @@ public class EnemyFabrick : MonoBehaviour
             enemy.GetComponent<EnemyHealth>().Initialize();
             //enemy.GetComponent<EnemyMovement>().Initialize();
             enemy.GetComponent<EnemyHealth>().OnDiee += CheckEnemyCount;
-            _spawndZombi.Add(enemy.GetComponent<EnemyHealth>());
+            _spawndEnemy.Add(enemy.GetComponent<EnemyHealth>());
         }
     }
 
     private void CheckEnemyCount(EnemyHealth enemy)
     {
-        _spawndZombi.Remove(enemy);
-        if (_spawndZombi.Count == 0)
+        _spawndEnemy.Remove(enemy);
+        if (_spawndEnemy.Count == 0)
         {
             StartCoroutine(StartNewWave());
         }
