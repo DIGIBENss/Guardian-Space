@@ -1,12 +1,16 @@
 using System;
+using System.Collections;
+using UnityEngine;
 
 public class StationHealth : IDamageable
 {
     public Action OnDie;
     public Action<float> OnValueChaned;
+    public Action<float> OnValueMaxSlider;
     public float MaxHealth => _maxHealth;
     public float Health => _health;
     private float _health, _maxHealth, _additional;
+    private float _repair = 5f;
 
     public StationHealth(float maxH, float add = 100)
     {
@@ -22,14 +26,28 @@ public class StationHealth : IDamageable
     }
         
 
-    public void Up() =>
-        _maxHealth += _additional;
+    public void Up()
+    {
+       _maxHealth += _additional;
+       _health = _maxHealth;
+       OnValueMaxSlider?.Invoke(_maxHealth);
+    }
+       
 
     public void TakeDamage(float damage)
     {
         _health -= damage;
         OnValueChaned?.Invoke(_health);
         if(_health < 0)OnDie?.Invoke();
+    }
+
+    public void Repair()
+    {
+        if(_maxHealth >= _health)
+        { 
+           _health += _repair;
+           OnValueChaned?.Invoke(_health);
+        }
     }
 
     

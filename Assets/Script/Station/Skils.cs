@@ -9,6 +9,7 @@ public class Skils : MonoBehaviour
 {
     public PriceSkills Price { get; private set; }
     [SerializeField] private Wallet _wallet;
+    [SerializeField] private Station _station;
     
     [SerializeField] private TextMeshProUGUI _adviceText;
     [SerializeField] private TextMeshProUGUI _cout;
@@ -75,6 +76,7 @@ public class Skils : MonoBehaviour
         {
             _wallet.SpendMoney(Price.PriceEndurance[_enduranceLevel]);
             Instantiate(_skills[_enduranceLevel], _endurance[_enduranceLevel]);
+            _station.UpgradeEnduranceStation();
             _enduranceLevel++;
         }
         else
@@ -103,6 +105,7 @@ public class Skils : MonoBehaviour
         {
             _wallet.SpendMoney(Price.PriceDamage[_damageLevel]);
             Instantiate(_skills[_damageLevel], _damage[_enduranceLevel]);
+            _station.UpgradeMainWeapon();
             _damageLevel++;
         }
         else

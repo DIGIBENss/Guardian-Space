@@ -27,20 +27,25 @@ public class Station : MonoBehaviour
         MainWeapon.Up();
         Health.Up();
     }
+    public void UpgradeEnduranceStation() => Health.Up();
 
+    public void UpgradeMainWeapon() => MainWeapon.Up();
+
+    public void Repairs() => Health.Repair();
     private void Start()
     {
         _sliderHP.minValue = 0;
         _sliderHP.maxValue = _maxHealth;
         _sliderHP.value = _maxHealth;
+        InvokeRepeating("Repairs", 0, 5);
     }
-
 
     private void Awake()
     {
         lock (Singleton = this)
             Health = new(_maxHealth);
         Health.OnValueChaned += ChangeSliderValue;
+        Health.OnValueMaxSlider +=ChangeSliderMaxValue;
         MainWeapon = new(_bullet, _damage, _searchRadius);
         Health.OnDie += () =>
         {
@@ -71,10 +76,13 @@ public class Station : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, _searchRadius);
     }
 
-    private void ChangeSliderValue(float value)
-    {
-        _sliderHP.value  = value;
-    }
+    private void ChangeSliderValue(float value) => _sliderHP.value  = value;
+    private void ChangeSliderMaxValue(float value) => _sliderHP.maxValue = value;
 
-    private void OnDestroy() => Health.OnValueChaned -= ChangeSliderValue;
+    private void OnDestroy() 
+    {
+        Health.OnValueChaned -= ChangeSliderValue;
+        Health.OnValueMaxSlider -=ChangeSliderMaxValue;
+    }
+     
 }
