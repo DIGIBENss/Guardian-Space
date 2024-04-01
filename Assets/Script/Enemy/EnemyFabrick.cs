@@ -49,7 +49,7 @@ public class EnemyFabrick : MonoBehaviour
             var point = _spawnPoints[num];
             var enemy = NightPool.Spawn(ChoiseEnemy().gameObject, point.transform.position, Quaternion.identity);
             enemy.GetComponent<EnemyHealth>().Initialize();
-            //enemy.GetComponent<EnemyMovement>().Initialize();
+//            enemy.GetComponent<EnemyMovement>().Initialize();
             enemy.GetComponent<EnemyHealth>().OnDiee += CheckEnemyCount;
             _spawndEnemy.Add(enemy.GetComponent<EnemyHealth>());
         }

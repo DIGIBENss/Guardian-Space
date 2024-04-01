@@ -7,47 +7,53 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
+    
+    public FX Fx { get; private set; }
+    public EnemyCout EnemyCout { get; private set; }
     public Action<EnemyHealth> OnDiee;
-    public Action OnDie;
+    public Action<Transform> OnDie;
     [SerializeField] private float _health;
     [SerializeField] private float _maxHealth;
     public float MaxHealth => _maxHealth;
     public float Health => _health;
 
-    [SerializeField] Slider healthBar;
+    [SerializeField] Slider _healthBar;
     [SerializeField, Range(20, 100)] private int _gold = 20;
-    private bool _canBeDamaged = true;
-    private bool _isDead = false;
-    void Update()
+
+    private void Awake()
     {
-        healthBar.value = _health;
+        EnemyCout = new EnemyCout();  
+        Fx= new FX();
     }
 
+    private void Update()
+    {
+        _healthBar.value = _health;
+    }
 
     public void TakeDamage(float damage)
     {
-        //if (!_canBeDamaged || _isDead) return;
-       // _canBeDamaged = false;
         _health -= damage;
         if (_health <= 0)
         {
-            //_health = 0;
-            //_isDead = true;
-            OnDie?.Invoke();
+            _health = 0;
+            //OnDie?.Invoke();
             OnDiee?.Invoke(this);
             if (Station.Singleton != null)
             {
-                //ZombieCounter.UpdateStat();
+                Fx.GetTransform(transform.position);
                 Station.Singleton.GetComponent<Wallet>().AddMoney(_gold);
-                NightPool.Despawn(this.gameObject, 1f);
+                EnemyCout.UpdateStat();
+                NightPool.Despawn(gameObject, 0.1f);
             }
         }
-       // _canBeDamaged = true;
     }
+
     public void Initialize()
     {
         _health = _maxHealth;
     }
+
     public void TakeHeal(float value)
     {
         if (_health + value <= _maxHealth)

@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class BaseBullet : MonoBehaviour, IBullet
 {
     [SerializeField] protected float _lifeTime, _damage;
-    [SerializeField, Range(0.1f, 15)] protected float _speed;
+    [SerializeField, Range(0.01f,0.95f)] protected float _speed;
     public float Speed => _speed;
     public float LifeTime => _lifeTime;
     public float Damage => _damage;
@@ -16,7 +16,9 @@ public abstract class BaseBullet : MonoBehaviour, IBullet
 
     protected virtual void DoDamage(IDamageable damageable) =>
         damageable.TakeDamage(_damage);
-    
+
+    public void SetSpeed(float value) => _speed += value;
+
     public void Create(Vector3 pos, Quaternion rotation, float damage)
     {
         this._damage = damage;

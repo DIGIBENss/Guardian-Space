@@ -11,45 +11,44 @@ public class Station : MonoBehaviour
     public bool IsAlive { get; private set; } = true;
 
     private bool _canShoot = true;
-
-    private readonly float _additionalFireRate = 0.1f;
+    public bool IsCreateStation;
+    
 
     [Header("Weapon")] [SerializeField] private BulletStation _bullet;
     [SerializeField] private float _damage, _searchRadius;
-    [SerializeField] private float _fireRate;
-    [Header("Health")] [SerializeField] private float _maxHealth;
-
+    public float FireRate;
+    [Header("Health")] [SerializeField] float _maxHealth;
     [SerializeField] private Slider _sliderHP;
-
-    public void Up()
-    {
-        _fireRate -= _additionalFireRate;
-        MainWeapon.Up();
-        Health.Up();
-    }
+    [Header("FX")] [SerializeField] private GameObject _damageOfStationFX;
+    public void OnRepair() => InvokeRepeating("Repair", 0, 0.5f);
     public void UpgradeEnduranceStation() => Health.Up();
 
     public void UpgradeMainWeapon() => MainWeapon.Up();
 
-    public void Repairs() => Health.Repair();
+    public void UpgradeRepair(int value)
+    {
+        Health.SkillRepairLvl(value);
+    }
+
     private void Start()
     {
         _sliderHP.minValue = 0;
         _sliderHP.maxValue = _maxHealth;
         _sliderHP.value = _maxHealth;
-        InvokeRepeating("Repairs", 0, 5);
     }
+
 
     private void Awake()
     {
         lock (Singleton = this)
             Health = new(_maxHealth);
         Health.OnValueChaned += ChangeSliderValue;
-        Health.OnValueMaxSlider +=ChangeSliderMaxValue;
+        Health.OnValueMaxSlider += ChangeSliderMaxValue;
         MainWeapon = new(_bullet, _damage, _searchRadius);
         Health.OnDie += () =>
         {
             IsAlive = false;
+            GameManager.Instance.CreateDestroyStationFx();
             Destroy(gameObject);
         };
     }
@@ -66,7 +65,7 @@ public class Station : MonoBehaviour
     private IEnumerator Cooldown()
     {
         _canShoot = false;
-        yield return new WaitForSeconds(_fireRate);
+        yield return new WaitForSeconds(FireRate);
         _canShoot = true;
     }
 
@@ -76,13 +75,22 @@ public class Station : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, _searchRadius);
     }
 
-    private void ChangeSliderValue(float value) => _sliderHP.value  = value;
-    private void ChangeSliderMaxValue(float value) => _sliderHP.maxValue = value;
+    private void ChangeSliderValue(float value)
+    {
+        _sliderHP.value = value;
+        if (Health.Health < Health.MaxHealth / 2 && IsCreateStation == false)
+        {
+            Instantiate(_damageOfStationFX);
+            IsCreateStation = true;
+        }
+    }
 
-    private void OnDestroy() 
+    private void ChangeSliderMaxValue(float value) => _sliderHP.maxValue = value;
+    private void Repair() => Health.Repair();
+
+    private void OnDestroy()
     {
         Health.OnValueChaned -= ChangeSliderValue;
-        Health.OnValueMaxSlider -=ChangeSliderMaxValue;
+        Health.OnValueMaxSlider -= ChangeSliderMaxValue;
     }
-     
 }
