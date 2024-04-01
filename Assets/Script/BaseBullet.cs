@@ -1,16 +1,22 @@
+using System;
 using UnityEngine;
 
 public abstract class BaseBullet : MonoBehaviour, IBullet
 {
     [SerializeField] protected float _lifeTime, _damage;
-    [SerializeField, Range(0.01f,0.95f)] protected float _speed;
+    [SerializeField] protected float _speed;
     public float Speed => _speed;
     public float LifeTime => _lifeTime;
     public float Damage => _damage;
 
+    private void Start()
+    {
+        _speed = 0.1f;
+    }
+
     private void FixedUpdate() =>
         Move();
-
+  
     protected void Move() =>
         this.transform.Translate(Vector3.forward * _speed);
 

@@ -6,28 +6,29 @@ using UnityEngine;
 public class EnemyCout
 {
     //public static Save Saver ;
-   // public static event Action<int> OnValueChanged;
-    public  int SpaceShipsKilled { get; private set; }
-    public  int ZombieKilledMax { get; private set; } 
-    public  void SetMax(int value) => ZombieKilledMax = value;
+    public static event Action<int> OnValueChanged;
+    public static int SpaceShipsKilled { get; private set; }
+    public static int SpaceShipsKilledMax { get; private set; }
+
     public void UpdateStat()
     {
         SpaceShipsKilled++;
-        if(SpaceShipsKilled > ZombieKilledMax)
+        if (SpaceShipsKilled > SpaceShipsKilledMax)
         {
-            ZombieKilledMax = SpaceShipsKilled;
+            SpaceShipsKilledMax = SpaceShipsKilled;
             ChouseRank(SpaceShipsKilled);
         }
-        //OnValueChanged?.Invoke(SpaceShipsKilled);
+
+        OnValueChanged?.Invoke(SpaceShipsKilled);
         //Saver.KilledZombie = ZombieKilled;
     }
 
-    public void ChouseRank(int value)
+    public static void ChouseRank(int value)
     {
         switch (value)
         {
             case 0:
-                GameManager.Instance.RankText.text = "Новобранец";
+                GameManager.Instance.RankText.text = "Молоко";
                 break;
             case 5:
                 GameManager.Instance.RankText.text = "Капрал";
@@ -44,13 +45,12 @@ public class EnemyCout
             case 100:
                 GameManager.Instance.RankText.text = "Адмирал";
                 break;
-            
-                
         }
     }
-    public  void SetStat(int value)
+
+    public void SetStat(int value)
     {
         SpaceShipsKilled = value;
-        //OnValueChanged?.Invoke(SpaceShipsKilled);
+        OnValueChanged?.Invoke(SpaceShipsKilled);
     }
 }

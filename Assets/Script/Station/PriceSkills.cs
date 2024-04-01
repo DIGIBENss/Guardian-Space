@@ -11,17 +11,15 @@ public class PriceSkills
     public int[] PriceRepair = new int[] {120,300,500,700,1200,1500,250};
     public int[] PriceDamage = new int[] {100,310,500,750,1200,1510,250};
     
-    public int GetPrice(int skillIndex, int level)
-    {
-        switch (skillIndex)
+    
+    public int GetPrice(int skillIndex, int level) =>
+        skillIndex switch
         {
-            case 0: return PriceInfluence[level];
-            case 1: return PriceManeuverability[level];
-            case 2: return PriceEndurance[level];
-            case 3: return PriceRepair[level];
-            case 4: return PriceDamage[level];
-            default: return 0;
-        }
-    }
+            0 => PriceInfluence[level],
+            1 => PriceManeuverability[level],
+            2 => PriceEndurance[level],
+            3 => PriceRepair[level],
+            4 => PriceDamage[level]
+        };
 }
 

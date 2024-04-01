@@ -9,7 +9,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 {
     
     public FX Fx { get; private set; }
-    public EnemyCout EnemyCout { get; private set; }
+    public EnemyCout SpaceShip { get; private set; }
     public Action<EnemyHealth> OnDiee;
     public Action<Transform> OnDie;
     [SerializeField] private float _health;
@@ -22,7 +22,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     private void Awake()
     {
-        EnemyCout = new EnemyCout();  
+        SpaceShip = new EnemyCout();  
         Fx= new FX();
     }
 
@@ -43,7 +43,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             {
                 Fx.GetTransform(transform.position);
                 Station.Singleton.GetComponent<Wallet>().AddMoney(_gold);
-                EnemyCout.UpdateStat();
+                SpaceShip.UpdateStat();
                 NightPool.Despawn(gameObject, 0.1f);
             }
         }
