@@ -5,15 +5,15 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 
-public class Skils : MonoBehaviour
+public class Skills : MonoBehaviour
 {
     public PriceSkills Price { get; private set; }
     [SerializeField] private Wallet _wallet;
     [SerializeField] private Station _station;
     [SerializeField] private BulletStation _bulletStation;
+    [SerializeField] private UiSkills _uiskills;
 
     [Header("Text")] [SerializeField] private TextMeshProUGUI _adviceText;
-    [SerializeField] private TextMeshProUGUI _cout;
     [SerializeField] private List<TextMeshProUGUI> _textSkills;
 
     [Header("Label")] [SerializeField] private List<Transform> _influence;
@@ -26,11 +26,11 @@ public class Skils : MonoBehaviour
 
     private string _failPurchase = "Необходимо M-Коинов:";
     private string _upgradeMax = "Максимальное";
-    private int _influenceLevel = 0;
-    private int _maneuverabilityLevel = 0;
-    private int _enduranceLevel = 0;
-    private int _repairLevel = 0;
-    private int _damageLevel = 0;
+    public int Ratefire = 0;
+    public int BulletSpeed = 0;
+    public int EnduranceLevel = 0;
+    public int RepairLevel = 0;
+    public int DamageLevel = 0;
     private bool _isRepair;
 
     private void Awake()
@@ -48,86 +48,78 @@ public class Skils : MonoBehaviour
 
     public void UpgradeInfluence()
     {
-        if (_influenceLevel < 7)
+        if (Ratefire < 7)
         {
-            if (Price.PriceInfluence[_influenceLevel] <= _wallet.Money)
+            if (Price.PriceRateFire[Ratefire] <= _wallet.Money)
             {
-                
-                _wallet.SpendMoney(Price.PriceInfluence[_influenceLevel]);
-                Instantiate(_skills[_influenceLevel], _influence[_influenceLevel]);
+                _wallet.SpendMoney(Price.PriceRateFire[Ratefire]);
+                Instantiate(_skills[Ratefire], _influence[Ratefire]);
                 //скорость между выстрелами 
                 _station.FireRate -= 0.15f;
-                _influenceLevel++;
+                Ratefire++;
                 _textSkills[0].text = _station.FireRate.ToString();
-            }
-            else
-            {
-                StartCoroutine(Advice(Price.PriceDamage[_influenceLevel]));
             }
         }
         else
         {
             StartCoroutine(UpgradeMaxText());
         }
+        _uiskills.CheckAvailableSkills();
     }
 
     public void UpgradeManeuverability()
     {
-        if (_maneuverabilityLevel < 7)
+        if (BulletSpeed < 7)
         {
-            if (Price.PriceManeuverability[_maneuverabilityLevel] <= _wallet.Money)
+            if (Price.PriceBulletSpeed[BulletSpeed] <= _wallet.Money)
             {
-                _wallet.SpendMoney(Price.PriceManeuverability[_maneuverabilityLevel]);
-                Instantiate(_skills[_maneuverabilityLevel], _maneuverability[_maneuverabilityLevel]);
+                _wallet.SpendMoney(Price.PriceBulletSpeed[BulletSpeed]);
+                Instantiate(_skills[BulletSpeed], _maneuverability[BulletSpeed]);
                 _bulletStation.SetSpeed(0.1f);
-                _maneuverabilityLevel++;
+                BulletSpeed++;
                 // скорость пули
                 _textSkills[1].text = _bulletStation.Speed.ToString();
-            }
-            else
-            {
-                StartCoroutine(Advice(Price.PriceDamage[_maneuverabilityLevel]));
             }
         }
         else
         {
             StartCoroutine(UpgradeMaxText());
         }
+
+        _uiskills.CheckAvailableSkills();
     }
 
     public void UpgradeEndurance()
     {
-        if (_enduranceLevel < 7)
+        if (EnduranceLevel < 7)
         {
-            if (Price.PriceEndurance[_enduranceLevel] <= _wallet.Money)
+            if (Price.PriceEndurance[EnduranceLevel] <= _wallet.Money)
             {
-                _wallet.SpendMoney(Price.PriceEndurance[_enduranceLevel]);
-                Instantiate(_skills[_enduranceLevel], _endurance[_enduranceLevel]);
+                _wallet.SpendMoney(Price.PriceEndurance[EnduranceLevel]);
+                Instantiate(_skills[EnduranceLevel], _endurance[EnduranceLevel]);
                 _station.UpgradeEnduranceStation();
-                _enduranceLevel++;
+                EnduranceLevel++;
                 _textSkills[2].text = _station.Health.MaxHealth.ToString();
-            }
-            else
-            {
-                StartCoroutine(Advice(Price.PriceDamage[_enduranceLevel]));
             }
         }
         else
         {
             StartCoroutine(UpgradeMaxText());
         }
+
+        _uiskills.CheckAvailableSkills();
     }
 
     public void UpgradeRepair()
     {
-        if (_repairLevel < 7)
+        if (RepairLevel < 7)
         {
-            if (Price.PriceRepair[_repairLevel] <= _wallet.Money)
+            if (Price.PriceRepair[RepairLevel] <= _wallet.Money)
             {
-                _wallet.SpendMoney(Price.PriceRepair[_repairLevel]);
-                Instantiate(_skills[_repairLevel], _repair[_enduranceLevel]);
-                _station.UpgradeRepair(_repairLevel);
-                _repairLevel++;
+                _wallet.SpendMoney(Price.PriceRepair[RepairLevel]);
+                Instantiate(_skills[RepairLevel], _repair[EnduranceLevel]);
+                _station.UpgradeRepair(RepairLevel);
+                RepairLevel++;
                 if (_isRepair == false)
                 {
                     _station.OnRepair();
@@ -136,49 +128,35 @@ public class Skils : MonoBehaviour
 
                 _textSkills[3].text = _station.Health.Repairs.ToString();
             }
-            else
-            {
-                StartCoroutine(Advice(Price.PriceDamage[_repairLevel]));
-            }
         }
         else
         {
             StartCoroutine(UpgradeMaxText());
         }
+
+        _uiskills.CheckAvailableSkills();
     }
 
     public void UpgradeDamage()
     {
-        if (_damageLevel < 7)
+        if (DamageLevel < 7)
         {
-            if (Price.PriceDamage[_damageLevel] <= _wallet.Money)
+            if (Price.PriceDamage[DamageLevel] <= _wallet.Money)
             {
-                _wallet.SpendMoney(Price.PriceDamage[_damageLevel]);
-                Instantiate(_skills[_damageLevel], _damage[_enduranceLevel]);
+                _wallet.SpendMoney(Price.PriceDamage[DamageLevel]);
+                Instantiate(_skills[DamageLevel], _damage[EnduranceLevel]);
                 _station.UpgradeMainWeapon();
                 _textSkills[4].text = _station.MainWeapon.Damage.ToString();
                 _textSkills[5].text = _station.MainWeapon.SearchRadius.ToString();
-                _damageLevel++;
-            }
-            else
-            {
-                StartCoroutine(Advice(Price.PriceDamage[_damageLevel]));
+                DamageLevel++;
             }
         }
-
         else
         {
             StartCoroutine(UpgradeMaxText());
         }
-    }
 
-    private IEnumerator Advice(int value)
-    {
-        _adviceText.text = _failPurchase;
-        _cout.text = value.ToString();
-        yield return new WaitForSeconds(0.1f);
-        _adviceText.text = "";
-        _cout.text = "";
+        _uiskills.CheckAvailableSkills();
     }
 
     private IEnumerator UpgradeMaxText()
@@ -186,6 +164,5 @@ public class Skils : MonoBehaviour
         _adviceText.text = _upgradeMax;
         yield return new WaitForSeconds(0.1f);
         _adviceText.text = "";
-        _cout.text = "";
     }
 }

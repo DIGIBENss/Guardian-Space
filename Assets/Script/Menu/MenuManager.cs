@@ -6,6 +6,7 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject MenuUI;
     [SerializeField] private GameObject Button;
+    [SerializeField] private UiSkills _uiSkills;
 
 
     public void Vivod()
@@ -21,6 +22,7 @@ public class MenuManager : MonoBehaviour
             MenuUI.SetActive(true);
             Time.timeScale = 0f;
             Button.SetActive(false);
+            _uiSkills.CheckAvailableSkills();
         }
     }
 }

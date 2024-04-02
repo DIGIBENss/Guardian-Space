@@ -25,10 +25,10 @@ public abstract class BaseBullet : MonoBehaviour, IBullet
 
     public void SetSpeed(float value) => _speed += value;
 
-    public void Create(Vector3 pos, Quaternion rotation, float damage)
+    public void Create(Vector3 pos, Vector3 rotation, float damage)
     {
         this._damage = damage;
-        var bullet = Instantiate(this, pos, rotation);
+        var bullet = Instantiate(this, pos, Quaternion.LookRotation(rotation));
         Destroy(bullet?.gameObject, _lifeTime);
     }
     

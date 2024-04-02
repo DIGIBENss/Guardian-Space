@@ -19,8 +19,10 @@ public class Weapon
     {
         FindTarget(instancePosition.position);
         if (_target != null && _canShoot)
-            _bullet.Create(firepoint == null ? instancePosition.position : firepoint.position,
-                Quaternion.LookRotation(_target.transform.position), Damage);
+        {
+            Vector3 direction = _target.transform.position - (firepoint == null ? instancePosition.position : firepoint.position);
+            _bullet.Create(firepoint == null ? instancePosition.position : firepoint.position, direction.normalized, Damage);
+        }
     }
 
     private void FindTarget(Vector3 instancePosition)
