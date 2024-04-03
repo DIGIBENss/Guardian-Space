@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuPause : MonoBehaviour
 {
@@ -22,5 +23,14 @@ public class MenuPause : MonoBehaviour
         ButtonMenuUpgrade.SetActive(true);
         ButtonPause.SetActive(true);
         Time.timeScale = 1f;
+    }
+
+    public void Restart()
+    {
+        Menu.SetActive(false);
+        ButtonMenuUpgrade.SetActive(true);
+        ButtonPause.SetActive(true);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
