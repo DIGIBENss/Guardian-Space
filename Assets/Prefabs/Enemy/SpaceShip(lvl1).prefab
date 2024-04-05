@@ -572,6 +572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c0bf2b5678e7548a53f29ec913d29e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _searchPlayer: {fileID: 1008834307246408513}
   _health: 100
   _maxHealth: 100
   _healthBar: {fileID: 5367501222353814187}
@@ -590,6 +591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stopDistance: 7
   _enemyAi: {fileID: 4215442052359918367}
+  _enemyHealth: {fileID: 5590905482994351204}
 --- !u!195 &7123976687924705646
 NavMeshAgent:
   m_ObjectHideFlags: 0

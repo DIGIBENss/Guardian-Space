@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     public EnemyCout SpaceShip { get; private set; }
     public Action<EnemyHealth> OnDiee;
     public Action<Transform> OnDie;
+    [SerializeField] private SearchPlayer _searchPlayer;
     [SerializeField] private float _health;
     [SerializeField] private float _maxHealth;
     public float MaxHealth => _maxHealth;
@@ -37,7 +38,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         if (_health <= 0)
         {
             _health = 0;
-            //OnDie?.Invoke();
             OnDiee?.Invoke(this);
             if (Station.Singleton != null)
             {

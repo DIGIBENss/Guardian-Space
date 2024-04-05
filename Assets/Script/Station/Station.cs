@@ -20,6 +20,7 @@ public class Station : MonoBehaviour
     [Header("Health")] [SerializeField] float _maxHealth;
     [SerializeField] private Slider _sliderHP;
     [Header("FX")] [SerializeField] private GameObject _damageOfStationFX;
+    [SerializeField] private MenuPause _menu;
     public void OnRepair() => InvokeRepeating("Repair", 0, 0.5f);
     public void UpgradeEnduranceStation() => Health.Up();
 
@@ -50,6 +51,7 @@ public class Station : MonoBehaviour
             IsAlive = false;
             GameManager.Instance.CreateDestroyStationFx();
             Destroy(gameObject);
+            _menu.Restart();
         };
     }
 

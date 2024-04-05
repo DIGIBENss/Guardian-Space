@@ -605,6 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c0bf2b5678e7548a53f29ec913d29e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _searchPlayer: {fileID: 602592727293111470}
   _health: 150
   _maxHealth: 150
   _healthBar: {fileID: 2843482457233881492}
@@ -623,6 +624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stopDistance: 7
   _enemyAi: {fileID: 6705287400530897786}
+  _enemyHealth: {fileID: 5233778123465128429}
 --- !u!54 &6204730842053094636
 Rigidbody:
   m_ObjectHideFlags: 0

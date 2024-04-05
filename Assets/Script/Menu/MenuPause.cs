@@ -27,10 +27,7 @@ public class MenuPause : MonoBehaviour
 
     public void Restart()
     {
+        SceneManager.LoadScene(0);
         Menu.SetActive(false);
-        ButtonMenuUpgrade.SetActive(true);
-        ButtonPause.SetActive(true);
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
