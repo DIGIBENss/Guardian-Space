@@ -21,7 +21,14 @@ public class Weapon
         if (_target != null && _canShoot)
         {
             Vector3 direction = _target.transform.position - (firepoint == null ? instancePosition.position : firepoint.position);
-            _bullet.Create(firepoint == null ? instancePosition.position : firepoint.position, direction.normalized, Damage);
+            if (direction.magnitude > SearchRadius) 
+            {
+                _target = null; 
+            }
+            else
+            {
+                _bullet.Create(firepoint == null ? instancePosition.position : firepoint.position, direction.normalized, Damage);
+            }
         }
     }
 
@@ -32,14 +39,14 @@ public class Weapon
             return;
         }
 
-        _target = null; // Сбрасываем текущую цель
+        _target = null; 
 
         foreach (var item in Physics.OverlapSphere(instancePosition, SearchRadius))
         {
             if (item.TryGetComponent(out EnemyHealth enemy) && enemy.gameObject.activeSelf)
             {
                 _target = enemy;
-                break; // Выходим из цикла после нахождения новой цели
+                break;
             }
         }
     }

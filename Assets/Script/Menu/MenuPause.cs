@@ -28,6 +28,7 @@ public class MenuPause : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(0);
-        Menu.SetActive(false);
+        Menu.SetActive(true);
+        Time.timeScale = 0f;
     }
 }

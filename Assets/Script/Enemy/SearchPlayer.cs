@@ -33,6 +33,7 @@ public class SearchPlayer : MonoBehaviour
         if (Station.Singleton != null)
         {
             float distanceToPlayer = Vector3.Distance(Station.Singleton.transform.position, transform.position);
+            
             if (_enemyHealth.Health <= _enemyHealth.MaxHealth / 2 && !_isproverka)
             {
                 Waste();
@@ -63,7 +64,7 @@ public class SearchPlayer : MonoBehaviour
 
     private IEnumerator RebootWaste()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(5);
         _isproverka = true;
         _isWaste = false;
     }

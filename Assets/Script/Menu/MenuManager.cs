@@ -7,8 +7,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject MenuUI;
     [SerializeField] private GameObject Button;
     [SerializeField] private UiSkills _uiSkills;
-
-
     public void Vivod()
     {
         if (MenuUI.activeSelf)

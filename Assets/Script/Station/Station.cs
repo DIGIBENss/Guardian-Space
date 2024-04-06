@@ -12,7 +12,7 @@ public class Station : MonoBehaviour
 
     private bool _canShoot = true;
     public bool IsCreateStation;
-    
+
 
     [Header("Weapon")] [SerializeField] private BulletStation _bullet;
     [SerializeField] private float _damage, _searchRadius;
@@ -21,15 +21,11 @@ public class Station : MonoBehaviour
     [SerializeField] private Slider _sliderHP;
     [Header("FX")] [SerializeField] private GameObject _damageOfStationFX;
     [SerializeField] private MenuPause _menu;
+
     public void OnRepair() => InvokeRepeating("Repair", 0, 0.5f);
     public void UpgradeEnduranceStation() => Health.Up();
-
     public void UpgradeMainWeapon() => MainWeapon.Up();
-
-    public void UpgradeRepair(int value)
-    {
-        Health.SkillRepairLvl(value);
-    }
+    public void UpgradeRepair(int value) => Health.SkillRepairLvl(value);
 
     private void Start()
     {
@@ -37,8 +33,7 @@ public class Station : MonoBehaviour
         _sliderHP.maxValue = _maxHealth;
         _sliderHP.value = _maxHealth;
     }
-
-
+    
     private void Awake()
     {
         lock (Singleton = this)
