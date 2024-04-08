@@ -13,19 +13,34 @@ public class Station : MonoBehaviour
     private bool _canShoot = true;
     public bool IsCreateStation;
 
-
+    [SerializeField] private Zona _zona;
     [Header("Weapon")] [SerializeField] private BulletStation _bullet;
-    [SerializeField] private float _damage, _searchRadius;
+    private float _damage = 10, _searchRadius = 9;
     public float FireRate;
     [Header("Health")] [SerializeField] float _maxHealth;
     [SerializeField] private Slider _sliderHP;
     [Header("FX")] [SerializeField] private GameObject _damageOfStationFX;
     [SerializeField] private MenuPause _menu;
-
+ 
     public void OnRepair() => InvokeRepeating("Repair", 0, 0.5f);
-    public void UpgradeEnduranceStation() => Health.Up();
-    public void UpgradeMainWeapon() => MainWeapon.Up();
+
+    public void UpgradeFireRate()
+    {
+        FireRate -= 0.15f;
+        MainWeapon.FireRate = FireRate;
+    }
+    public void UpgradeMainWeaponAndZona()
+    {
+        MainWeapon.Up();
+        _zona.UP();
+    }
     public void UpgradeRepair(int value) => Health.SkillRepairLvl(value);
+
+    public void UpgradeEnduranceStation()
+    {
+        Health.Up();
+        _sliderHP.value = _maxHealth;
+    }
 
     private void Start()
     {
@@ -33,14 +48,14 @@ public class Station : MonoBehaviour
         _sliderHP.maxValue = _maxHealth;
         _sliderHP.value = _maxHealth;
     }
-    
+
     private void Awake()
     {
         lock (Singleton = this)
             Health = new(_maxHealth);
         Health.OnValueChaned += ChangeSliderValue;
         Health.OnValueMaxSlider += ChangeSliderMaxValue;
-        MainWeapon = new(_bullet, _damage, _searchRadius);
+        MainWeapon = new(_bullet, _damage, _searchRadius, FireRate, _zona);
         Health.OnDie += () =>
         {
             IsAlive = false;
@@ -52,26 +67,25 @@ public class Station : MonoBehaviour
 
     private void Update()
     {
-        if (_canShoot)
-        {
-            MainWeapon.Shoot(transform);
-            StartCoroutine(Cooldown());
-        }
+        MainWeapon.Shoot(transform);
     }
 
-    private IEnumerator Cooldown()
-    {
-        _canShoot = false;
-        yield return new WaitForSeconds(FireRate);
-        _canShoot = true;
-    }
 
-    private void OnDrawGizmosSelected()
+    public void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _searchRadius);
+        Gizmos.color = Color.blue;
+        Collider[] colliders =
+            Physics.OverlapSphere(transform.position, _searchRadius);
+        foreach (var collider in colliders)
+        {
+            Gizmos.DrawLine(transform.position,
+                collider.transform.position); 
+            Gizmos.DrawWireSphere(collider.transform.position, 0.5f);
+        }
     }
-
+    
     private void ChangeSliderValue(float value)
     {
         _sliderHP.value = value;
@@ -81,10 +95,9 @@ public class Station : MonoBehaviour
             IsCreateStation = true;
         }
     }
-
     private void ChangeSliderMaxValue(float value) => _sliderHP.maxValue = value;
     private void Repair() => Health.Repair();
-
+    
     private void OnDestroy()
     {
         Health.OnValueChaned -= ChangeSliderValue;

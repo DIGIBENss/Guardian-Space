@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using NTC.Pool;
+//using NTC.Pool;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +11,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     public FX Fx { get; private set; }
     public EnemyCout SpaceShip { get; private set; }
     public Action<EnemyHealth> OnDiee;
-    public Action<Transform> OnDie;
     [SerializeField] private SearchPlayer _searchPlayer;
     [SerializeField] private float _health;
     [SerializeField] private float _maxHealth;
@@ -42,7 +41,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
                 Fx.GetTransform(transform.position);
                 Station.Singleton.GetComponent<Wallet>().AddMoney(_gold);
                 SpaceShip.UpdateStat();
-                NightPool.Despawn(gameObject, 0.1f);
+                Destroy(gameObject);
             }
         }
     }

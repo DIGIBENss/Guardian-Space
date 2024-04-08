@@ -1,59 +1,45 @@
+using System.Collections;
 using UnityEngine;
 
 public class Weapon
 {
-    public float Damage = 50, SearchRadius;
+    public float Damage, SearchRadius, FireRate;
     private BulletStation _bullet;
-    private EnemyHealth _target = null;
+    private EnemyHealth _target;
     private bool _canShoot = true;
     private readonly float _additionalDamage = 5, _additionalRadius = 3;
+    private Vector3 _instancePosition;
+    private Zona _zona;
 
-    public Weapon(BulletStation bullet, float damage, float radius)
+    public Weapon(BulletStation bullet, float damage, float radius, float firerate, Zona zona)
     {
         _bullet = bullet;
         Damage = damage;
         SearchRadius = radius;
+        FireRate = firerate;
+        _zona = zona;
     }
 
     public void Shoot(Transform instancePosition, Transform firepoint = null)
     {
-        FindTarget(instancePosition.position);
-        if (_target != null && _canShoot)
-        {
-            Vector3 direction = _target.transform.position - (firepoint == null ? instancePosition.position : firepoint.position);
-            if (direction.magnitude > SearchRadius) 
-            {
-                _target = null; 
-            }
-            else
-            {
-                _bullet.Create(firepoint == null ? instancePosition.position : firepoint.position, direction.normalized, Damage);
-            }
-        }
+        if (!_canShoot || _zona.Enemys.Count <= 0 || _zona.Enemys[0] == null) return;
+        Vector3 direction = _zona.Enemys[0].transform.position -
+                            (firepoint == null ? instancePosition.position : firepoint.position);
+
+        _bullet.Create(firepoint == null ? instancePosition.position : firepoint.position, direction.normalized,
+            Damage, 0.2f);
+        Station.Singleton.StartCoroutine(Cooldown());
     }
 
-    private void FindTarget(Vector3 instancePosition)
+    private IEnumerator Cooldown()
     {
-        if (_target != null && _target.gameObject.activeSelf)
-        {
-            return;
-        }
-
-        _target = null; 
-
-        foreach (var item in Physics.OverlapSphere(instancePosition, SearchRadius))
-        {
-            if (item.TryGetComponent(out EnemyHealth enemy) && enemy.gameObject.activeSelf)
-            {
-                _target = enemy;
-                break;
-            }
-        }
+        _canShoot = false;
+        yield return new WaitForSeconds(FireRate);
+        _canShoot = true;
     }
 
     public void Up()
     {
         Damage += _additionalDamage;
-        SearchRadius += _additionalRadius;
     }
 }

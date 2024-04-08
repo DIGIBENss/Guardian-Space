@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6556135130188917058}
   - component: {fileID: 4293957216101616057}
   - component: {fileID: 5233579274148961392}
-  m_Layer: 5
+  m_Layer: 31
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1683370018382462394}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2896357202794413633}
-  m_Layer: 5
+  m_Layer: 31
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1558467193781734680}
   - component: {fileID: 5367501222353814187}
-  m_Layer: 5
+  m_Layer: 31
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 1
-  m_Value: 0
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 2347623638108814177}
   - component: {fileID: 4828687548548005054}
   - component: {fileID: 7918366438548544700}
-  m_Layer: 5
+  m_Layer: 31
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 8737794489671302531}
   - component: {fileID: 8196618100469193114}
   - component: {fileID: 8080072532920357258}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: EnamyCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,6 +486,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpaceShip(lvl1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2bb5cf472e0e6d249a742f9c3b70f14f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -601,7 +606,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 986353306173953421}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.55
+  m_Radius: 5.15
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -622,7 +627,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 986353306173953421}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -674,6 +679,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: engine_1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3375792452548045025, guid: 214b96e46305e924c8a99f3b1a166b29,
+        type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170007499614170443, guid: 214b96e46305e924c8a99f3b1a166b29,
+        type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5666642389508838935, guid: 214b96e46305e924c8a99f3b1a166b29,
+        type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 6739102751303801902, guid: 214b96e46305e924c8a99f3b1a166b29,
         type: 3}
@@ -748,6 +768,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: engine_1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3375792452548045025, guid: 214b96e46305e924c8a99f3b1a166b29,
+        type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170007499614170443, guid: 214b96e46305e924c8a99f3b1a166b29,
+        type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5666642389508838935, guid: 214b96e46305e924c8a99f3b1a166b29,
+        type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 6739102751303801902, guid: 214b96e46305e924c8a99f3b1a166b29,
         type: 3}

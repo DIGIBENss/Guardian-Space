@@ -8,11 +8,12 @@ using UnityEngine;
 public class Skills : MonoBehaviour
 {
     public PriceSkills Price { get; private set; }
-    [SerializeField] private Wallet _wallet;
+    [Header("Links")][SerializeField] private Wallet _wallet;
     [SerializeField] private Station _station;
     [SerializeField] private BulletStation _bulletStation;
     [SerializeField] private UiSkills _uiskills;
-
+    [SerializeField] private Zona _zona;
+    
     [Header("Text")] [SerializeField] private TextMeshProUGUI _adviceText;
     [SerializeField] private List<TextMeshProUGUI> _textSkills;
 
@@ -55,7 +56,7 @@ public class Skills : MonoBehaviour
                 _wallet.SpendMoney(Price.PriceRateFire[Ratefire]);
                 Instantiate(_skills[Ratefire], _influence[Ratefire]);
                 //скорость между выстрелами 
-                _station.FireRate -= 0.15f;
+                _station.UpgradeFireRate();
                 Ratefire++;
                 _textSkills[0].text = _station.FireRate.ToString();
             }
@@ -64,6 +65,7 @@ public class Skills : MonoBehaviour
         {
             StartCoroutine(UpgradeMaxText());
         }
+
         _uiskills.CheckAvailableSkills();
     }
 
@@ -117,7 +119,7 @@ public class Skills : MonoBehaviour
             if (Price.PriceRepair[RepairLevel] <= _wallet.Money)
             {
                 _wallet.SpendMoney(Price.PriceRepair[RepairLevel]);
-                Instantiate(_skills[RepairLevel], _repair[EnduranceLevel]);
+                Instantiate(_skills[RepairLevel], _repair[RepairLevel]);
                 _station.UpgradeRepair(RepairLevel);
                 RepairLevel++;
                 if (_isRepair == false)
@@ -144,10 +146,10 @@ public class Skills : MonoBehaviour
             if (Price.PriceDamage[DamageLevel] <= _wallet.Money)
             {
                 _wallet.SpendMoney(Price.PriceDamage[DamageLevel]);
-                Instantiate(_skills[DamageLevel], _damage[EnduranceLevel]);
-                _station.UpgradeMainWeapon();
+                Instantiate(_skills[DamageLevel], _damage[DamageLevel]);
+                _station.UpgradeMainWeaponAndZona();
                 _textSkills[4].text = _station.MainWeapon.Damage.ToString();
-                _textSkills[5].text = _station.MainWeapon.SearchRadius.ToString();
+                _textSkills[5].text = _zona.Box.size.x.ToString();
                 DamageLevel++;
             }
         }

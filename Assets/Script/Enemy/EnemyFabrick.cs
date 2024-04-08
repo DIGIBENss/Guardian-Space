@@ -1,4 +1,4 @@
-using NTC.Pool;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -47,9 +47,9 @@ public class EnemyFabrick : MonoBehaviour
         {
             var num = UnityEngine.Random.Range(0, _spawnPoints.Count);
             var point = _spawnPoints[num];
-            var enemy = NightPool.Spawn(ChoiseEnemy().gameObject, point.transform.position, Quaternion.identity);
+            var enemy = Instantiate(ChoiseEnemy().gameObject, point.transform.position, Quaternion.identity);
             enemy.GetComponent<EnemyHealth>().Initialize();
-//            enemy.GetComponent<EnemyMovement>().Initialize();
+//          enemy.GetComponent<EnemyMovement>().Initialize();
             enemy.GetComponent<EnemyHealth>().OnDiee += CheckEnemyCount;
             _spawndEnemy.Add(enemy.GetComponent<EnemyHealth>());
         }
