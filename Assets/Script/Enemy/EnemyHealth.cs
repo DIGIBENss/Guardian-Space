@@ -21,20 +21,18 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [SerializeField] Slider _healthBar;
     [SerializeField, Range(20, 100)] private int _gold = 20;
 
+
     private void Awake()
     {
         SpaceShip = new EnemyCout();  
         Fx= new FX();
     }
 
-    private void Update()
-    {
-        _healthBar.value = _health;
-    }
 
     public void TakeDamage(float damage)
     {
         _health -= damage;
+        _healthBar.value = _health;
         if (_health <= 0)
         {
             _health = 0;
@@ -61,4 +59,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             _health += value;
         }
     }
+
+
 }
