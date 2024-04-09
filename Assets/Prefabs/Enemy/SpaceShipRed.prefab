@@ -484,7 +484,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4e6f3bfd8fbb0f749952800c3c924d41,
         type: 3}
       propertyPath: m_Name
-      value: SpaceShipRed(lvl4)
+      value: SpaceShipRed
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -612,10 +612,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _searchPlayer: {fileID: 3420422918970366564}
-  _health: 150
-  _maxHealth: 150
+  _health: 75
+  _maxHealth: 75
   _healthBar: {fileID: 4592370073003521429}
-  _gold: 95
+  _gold: 20
 --- !u!114 &3420422918970366564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,7 +628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7858e8a8d011c2246983998c041b64ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopDistance: 7
+  stopDistance: 6.5
   _enemyAi: {fileID: 1950379059373742310}
   _enemyHealth: {fileID: 9214317235100769190}
 --- !u!54 &351075782232547530

@@ -20,6 +20,12 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [SerializeField] Slider _healthBar;
     [SerializeField, Range(20, 100)] private int _gold = 20;
 
+    private void Start()
+    {
+        _healthBar.minValue = 0;
+        _healthBar.maxValue = _maxHealth;
+        _healthBar.value = _health;
+    }
 
     private void Awake()
     {

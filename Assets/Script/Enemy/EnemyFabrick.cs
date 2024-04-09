@@ -74,7 +74,7 @@ public class EnemyFabrick : MonoBehaviour
             print("tierUP");
             _tier++;
             if (_tier > 4) _tier = 0;
-            _timeToNextWave += 30;
+            //_timeToNextWave += 30;
         }
 
         OnLevelEnd?.Invoke();

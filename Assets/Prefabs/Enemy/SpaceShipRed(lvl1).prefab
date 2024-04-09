@@ -655,7 +655,7 @@ MonoBehaviour:
   _health: 100
   _maxHealth: 100
   _healthBar: {fileID: 3114668900880819858}
-  _gold: 69
+  _gold: 35
 --- !u!114 &3035161897617668785
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,11 +20,7 @@ public abstract class BaseBullet : MonoBehaviour, IBullet
     protected virtual void DoDamage(IDamageable damageable) =>
         damageable.TakeDamage(_damage);
 
-    public void SetSpeed(float value)
-    {
-        _speed += value;
-        print(_speed.ToString());
-    }
+
 
     public void Create(Vector3 pos, Vector3 rotation, float damage, float speed)
     {

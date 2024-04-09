@@ -77,10 +77,10 @@ public class Skills : MonoBehaviour
             {
                 _wallet.SpendMoney(Price.PriceBulletSpeed[BulletSpeed]);
                 Instantiate(_skills[BulletSpeed], _maneuverability[BulletSpeed]);
-                _bulletStation.SetSpeed(0.1f);
+                _station.MainWeapon.UpBulletSpeed(0.1f);
                 BulletSpeed++;
                 // скорость пули
-                _textSkills[1].text = _bulletStation.Speed.ToString();
+                _textSkills[1].text = _station.MainWeapon.BulletSpeed.ToString();
             }
         }
         else

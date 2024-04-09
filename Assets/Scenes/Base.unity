@@ -640,13 +640,21 @@ MonoBehaviour:
   _first:
   - {fileID: 3406474375522950230, guid: d7adefc539d82cd459995e32dc28512c, type: 3}
   _second:
+  - {fileID: 2548824770162086405, guid: 9ca3b29ce155d6a428884aad5804306a, type: 3}
   - {fileID: 4212283883174189091, guid: 9da8ac12e404d9845994ddea307b3b46, type: 3}
   _thrid:
   - {fileID: 4212283883174189091, guid: 9da8ac12e404d9845994ddea307b3b46, type: 3}
+  - {fileID: 3406474375522950230, guid: d7adefc539d82cd459995e32dc28512c, type: 3}
   _four:
+  - {fileID: 1950379059373742310, guid: aad35f17ef8e2944a80937323ce81af7, type: 3}
+  - {fileID: 2548824770162086405, guid: 9ca3b29ce155d6a428884aad5804306a, type: 3}
   - {fileID: 4212283883174189091, guid: 9da8ac12e404d9845994ddea307b3b46, type: 3}
+  - {fileID: 3406474375522950230, guid: d7adefc539d82cd459995e32dc28512c, type: 3}
   _five:
+  - {fileID: 1950379059373742310, guid: aad35f17ef8e2944a80937323ce81af7, type: 3}
+  - {fileID: 2548824770162086405, guid: 9ca3b29ce155d6a428884aad5804306a, type: 3}
   - {fileID: 4212283883174189091, guid: 9da8ac12e404d9845994ddea307b3b46, type: 3}
+  - {fileID: 3406474375522950230, guid: d7adefc539d82cd459995e32dc28512c, type: 3}
   _spawnPoints:
   - {fileID: 203145217}
   - {fileID: 1891987765}
@@ -655,7 +663,7 @@ MonoBehaviour:
   - {fileID: 76486065}
   - {fileID: 203832411}
   _enemyPerSpawn: 1
-  _additionalEnemy: 2
+  _additionalEnemy: 1
   _timeToNextWave: 4
   _spawndEnemy: []
 --- !u!114 &77032930
@@ -670,21 +678,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5dac5a9786b4db18d8ad4187d7245d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _updateType: 0
-  preloadPoolsType: 1
-  poolsPreset: {fileID: 11400000, guid: c3aac0162504a9d4993e3ee3842794d9, type: 2}
-  _behaviourOnCapacityReached: 3
-  _despawnType: 0
-  _callbacksType: 0
-  _capacity: 64
-  _dontDestroyOnLoad: 0
-  _sendWarnings: 1
-  _nightPoolMode: 0
-  _reactionOnRepeatedDelayedDespawn: 1
-  _despawnPersistentClonesOnDestroy: 1
-  _checkClonesForNull: 0
-  _checkForPrefab: 1
-  _clearEventsOnDestroy: 1
 --- !u!1 &85462109
 GameObject:
   m_ObjectHideFlags: 0
@@ -9495,8 +9488,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 118, y: -28.409912}
-  m_SizeDelta: {x: 200, y: 26.819822}
+  m_AnchoredPosition: {x: 120.13, y: -28.409912}
+  m_SizeDelta: {x: 204.26, y: 26.819822}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1885414439
 MonoBehaviour:
@@ -9518,7 +9511,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u0440\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C"
+  m_text: "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u0440\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C:"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f5476aa90589d64ea8796c821fc43e6, type: 2}
   m_sharedMaterial: {fileID: -6207332626073790737, guid: 0f5476aa90589d64ea8796c821fc43e6,
@@ -10251,7 +10244,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041C\u0430\u043D\u0435\u0432\u0440\u0435\u043D\u043D\u043E\u0441\u0442\u044C:"
+  m_text: "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C \u041F\u0443\u043B\u0438:"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f5476aa90589d64ea8796c821fc43e6, type: 2}
   m_sharedMaterial: {fileID: -6207332626073790737, guid: 0f5476aa90589d64ea8796c821fc43e6,

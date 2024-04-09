@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Weapon
 {
-    public float Damage, SearchRadius, FireRate;
+    public float Damage, SearchRadius, FireRate, BulletSpeed = 0.1f;
     private BulletStation _bullet;
     private EnemyHealth _target;
     private bool _canShoot = true;
@@ -27,7 +27,7 @@ public class Weapon
                             (firepoint == null ? instancePosition.position : firepoint.position);
 
         _bullet.Create(firepoint == null ? instancePosition.position : firepoint.position, direction.normalized,
-            Damage, 0.2f);
+            Damage, BulletSpeed);
         Station.Singleton.StartCoroutine(Cooldown());
     }
 
@@ -41,5 +41,10 @@ public class Weapon
     public void Up()
     {
         Damage += _additionalDamage;
+    }
+
+    public void UpBulletSpeed(float value)
+    {
+        BulletSpeed += value;
     }
 }

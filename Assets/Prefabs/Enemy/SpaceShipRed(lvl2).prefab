@@ -694,7 +694,7 @@ MonoBehaviour:
   _health: 150
   _maxHealth: 150
   _healthBar: {fileID: 8511675199519618436}
-  _gold: 85
+  _gold: 55
 --- !u!114 &-3734480980081282587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,7 +707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7858e8a8d011c2246983998c041b64ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopDistance: 7
+  stopDistance: 8
   _enemyAi: {fileID: 4212283883174189091}
   _enemyHealth: {fileID: -8319745811519520456}
 --- !u!54 &3879651011271597139
